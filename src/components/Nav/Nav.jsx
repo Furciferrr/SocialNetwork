@@ -5,16 +5,16 @@ const Nav = () => {
     return (
     <nav className={classes.nav}>
         <div className={`${classes.item} ${classes.active}`}>
-            <a href='#'>Profile</a>
+            <a href='https'>Profile</a>
         </div>
         <div className={classes.item}>
-            <a href='#'>News</a>
+            <a href='https'>News</a>
         </div>
         <div className={classes.item}>
-            <a href='#'>Music</a>
+            <a href='https'>Music</a>
         </div>
         <div className={classes.item}>
-            <a href='#'>Messages</a>
+            <a href='https'>Messages</a>
         </div>
     </nav>
     )
