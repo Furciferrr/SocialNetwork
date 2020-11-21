@@ -7,19 +7,26 @@ import Message from './Message/Message';
 const Dialogs = (props) => {
   
 
-    let dialogsElements = props.state.dialogData.map((element) => {
+    let dialogsElements = props.messagesPage.dialogData.map((element) => {
       return(
         <DialogItem name={element.name} id={element.id} dialogAvaLink={element.dialogAvaLink}/>
       );
     });
 
 
-    let messagesElements = props.state.messagesData.map(message => <Message message={message.message}/>);
+    let messagesElements = props.messagesPage.messagesData.map(message => <Message message={message.message}/>);
 
     let newMessasge = React.createRef();
+
     let addMessage = () =>{
       let text = newMessasge.current.value 
-      alert(text);
+      alert(text)
+      newMessasge.current.value="";
+    }
+
+    let changeText = () => {
+      let text = newMessasge.current.value 
+      props.onChengeMes(text)
     }
 
     return (
@@ -32,7 +39,7 @@ const Dialogs = (props) => {
         </div>
         <div>
             <div>
-              <textarea ref={newMessasge}></textarea>
+              <textarea onChange={changeText} ref={newMessasge} value={props.messagesPage.chengeMessage}></textarea>
             </div>
             <button onClick={addMessage}>add message</button>
         </div>

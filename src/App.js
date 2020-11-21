@@ -20,7 +20,8 @@ function App(props) {
                                          state={props.state.contentPage}
                                          addPost={props.addPost}/>}/>
               <Route path="/dialogs" render={ () => <Dialogs
-                                         state={props.state.messagesPage}/>}/> 
+                                         messagesPage={props.state.messagesPage}
+                                         onChengeMes={props.onChengeMes}/>}/> 
               <Route path="/news" render={ () => <News/>}/>
               <Route path="/music" render={ () => <Music/>}/> 
               <Route path="/settings" render={ () => <Settings/>}/> 

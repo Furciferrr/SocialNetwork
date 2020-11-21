@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {addPost} from './redax/state'
+import {addPost, onChengeMes} from './redax/state'
 
 
 export let rerenderEntireTree = (state) =>{
@@ -10,7 +10,8 @@ export let rerenderEntireTree = (state) =>{
 ReactDOM.render(
   <React.StrictMode>
     <App state={state}
-         addPost={addPost}/>
+         addPost={addPost}
+         onChengeMes={onChengeMes}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

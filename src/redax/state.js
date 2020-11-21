@@ -14,6 +14,9 @@ import {rerenderEntireTree} from '../render';
             {id: 1, message: 'Hi'},
             {id: 2, message: 'How are you?'},
             {id: 3, message: 'What the fuck?'}],
+
+
+          chengeMessage: 'it-kamasutra.com'
       },
 
       contentPage: {
@@ -39,5 +42,10 @@ import {rerenderEntireTree} from '../render';
     state.contentPage.postsData.push(newPost);
     rerenderEntireTree(state);
     
+  }
+
+  export let onChengeMes = (mess) => {
+    state.messagesPage.chengeMessage = mess;
+    rerenderEntireTree(state);
   }
   export default state
