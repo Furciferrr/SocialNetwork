@@ -11,10 +11,22 @@ padding: 10px;
 color:white;
 }
 
+.dialog img {
+    width: 50px;
+}
+
+.dialog a {
+    margin: 10px;
+    text-decoration: none;
+}
+
 .messagesBlock{
     color:white;
+    padding-left: 110px;
+
 }
 
 .message {
     color:white;
+    margin:40px;
 }
