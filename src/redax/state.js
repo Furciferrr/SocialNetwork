@@ -1,4 +1,6 @@
-import {rerenderEntireTree} from '../render';
+ let rerenderEntireTree = () => {
+  console.log('state changed')
+ }
   let state = {
       messagesPage: {
         dialogData:[
@@ -47,5 +49,9 @@ import {rerenderEntireTree} from '../render';
   export let onChengeMes = (mess) => {
     state.messagesPage.chengeMessage = mess;
     rerenderEntireTree(state);
+  }
+
+  export const subscribe = (observer) =>{
+    rerenderEntireTree = observer;
   }
   export default state
