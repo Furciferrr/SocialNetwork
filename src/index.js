@@ -3,26 +3,23 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
-import {addPost, onChengeMes} from './redax/state';
-import state, {subscribe} from './redax/state';
+import store from './redax/state';
 
 
-let rerenderEntireTree = (state) =>{
+let rerenderEntireTree = () =>{
 
     ReactDOM.render(
       <React.StrictMode>
-        <App state={state}
-             addPost={addPost}
-             onChengeMes={onChengeMes}/>
+        <App store={store}/>
       </React.StrictMode>,
       document.getElementById('root')
     );
     }
 
-    rerenderEntireTree(state);
-
-    subscribe(rerenderEntireTree);
-
+    rerenderEntireTree(store);
+    
+    store.subscribe(rerenderEntireTree);
+    store.whatThis();
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

@@ -18,7 +18,7 @@ const BestFriends = (props) => {
 
 const Nav = (props) => {
     
-    let bestFriendElem = props.state.map((friend) => {
+    let bestFriendElem = props.state.bestFriends.map((friend) => {
         return(
             <BestFriends avaLink={friend.dialogAvaLink} name={friend.name}/>
         )

@@ -14,14 +14,14 @@ function App(props) {
     <BrowserRouter>
         <div className="app-wrapper">
           <Header/>
-          <Nav state={props.state.bestFriends}/>
+          <Nav state={props.store.getState()}/>
           <div className='app-wrapper-content'>
               <Route path="/profile" render={ () => <Content
-                                         state={props.state.contentPage}
-                                         addPost={props.addPost}/>}/>
+                                         state={props.store.getState()}
+                                         store={props.store}/>}/>
               <Route path="/dialogs" render={ () => <Dialogs
-                                         messagesPage={props.state.messagesPage}
-                                         onChengeMes={props.onChengeMes}/>}/> 
+                                         state={props.store.getState()}
+                                         store={props.store}/>}/> 
               <Route path="/news" render={ () => <News/>}/>
               <Route path="/music" render={ () => <Music/>}/> 
               <Route path="/settings" render={ () => <Settings/>}/> 

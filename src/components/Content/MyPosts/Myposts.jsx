@@ -5,7 +5,7 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-let postsElem = props.postsData.map((post) => {
+let postsElem = props.state.contentPage.postsData.map((post) => {
   return (
     <Post message={post.message} likenumb={post.likeNumb} avalink={post.avaLink}/>
   );
@@ -15,7 +15,7 @@ let newPostsElement = React.createRef();
 
 let addPosts = () => {
   let text = newPostsElement.current.value
-  props.addPost(text);
+  props.store.addPost(text);
   newPostsElement.current.value = '';
 }
 
