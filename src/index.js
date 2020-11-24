@@ -4,14 +4,17 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
 import store from './redax/state';
-
+import { BrowserRouter } from 'react-router-dom';
 
 let rerenderEntireTree = () =>{
 
     ReactDOM.render(
-      <React.StrictMode>
-        <App store={store}/>
-      </React.StrictMode>,
+      <BrowserRouter>
+          <React.StrictMode>
+            <App store={store}
+                dispatch={store.dispatch.bind(store)}/>
+          </React.StrictMode>
+      </BrowserRouter>,
       document.getElementById('root')
     );
     }
@@ -19,7 +22,7 @@ let rerenderEntireTree = () =>{
     rerenderEntireTree(store);
     
     store.subscribe(rerenderEntireTree);
-    store.whatThis();
+    
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

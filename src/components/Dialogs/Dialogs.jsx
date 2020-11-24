@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-
+import {updateChengeMessage, addMessageActionCreater} from './../../redax/state'
  
 const Dialogs = (props) => {
   
@@ -16,18 +16,16 @@ const Dialogs = (props) => {
 
     let messagesElements = props.state.messagesPage.messagesData.map(message => <Message message={message.message}/>);
 
-    let newMessasge = React.createRef();
+   
 
-    let addMessage = () =>{
-      let text = newMessasge.current.value 
-      alert(text)
-      newMessasge.current.value = ''
+
+    let addMessage = () => {
+      props.dispatch(addMessageActionCreater());
     }
 
-    let changeText = () => {
-      let text = newMessasge.current.value 
-      props.store.onChengeMes(text)
-      
+    let changeText = (e) => {
+      let text = e.target.value
+      props.dispatch(updateChengeMessage(text))
     }
 
     return (
@@ -40,7 +38,7 @@ const Dialogs = (props) => {
         </div>
         <div>
             <div>
-              <textarea onChange={changeText} ref={newMessasge} value={props.store.getValueMessage()}></textarea>
+              <textarea onChange={changeText} value={props.store.getValueMessage()}></textarea>
             </div>
             <button onClick={addMessage}>add message</button>
         </div>
