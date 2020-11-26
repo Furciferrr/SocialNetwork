@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
-import {addPostActionCreater, updateChengeMessage} from './../../../redax/state'
+import {addPostActionCreater, updateChengePost} from './../../../redax/contentPage-reducer'
 
 
 const MyPosts = (props) => {
@@ -21,13 +21,13 @@ let addPosts = () => {
 
 let changeText = () => {
   let text = newPostsElement.current.value 
-  props.dispatch(updateChengeMessage(text));
+  props.dispatch(updateChengePost(text));
 }
     return (
           <div className={classes.posts}>My posts
               <div>
                   <div>
-                    <textarea onChange={changeText} value={props.store.getValueMessage()} ref={newPostsElement}></textarea>
+                    <textarea onChange={changeText} value={props.store.getValuePost()} ref={newPostsElement}></textarea>
                   </div>
                   <button onClick={ addPosts }>add post</button>
               </div>

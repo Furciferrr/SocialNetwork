@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import {updateChengeMessage, addMessageActionCreater} from './../../redax/state'
+import {updateChengeMessage, addMessageActionCreater} from './../../redax/messagePage-reducer'
  
 const Dialogs = (props) => {
   
