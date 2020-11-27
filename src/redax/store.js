@@ -18,34 +18,6 @@ import bestFriendsReducer from './bestFriends-reducer'
     bestFriendsReducer(this._state.bestFriends, action)
     this.rerenderEntireTree(this._state);
 
-    /* if (action.type === 'ADD-POST') {
-      let newPost = {
-        id: 5,
-        message: this._state.contentPage.chengePost,
-        likeNumb:0,
-        avaLink: 'https://i.pinimg.com/170x/a1/9b/83/a19b83023cdb650a17623bf6bf456245.jpg'
-      };
-      this._state.contentPage.postsData.push(newPost);
-      this.rerenderEntireTree(this._state);
-      this._state.contentPage.chengePost = '';
-
-    } else if (action.type === 'ON-CHANGE-POST'){
-      this._state.contentPage.chengePost = action.mess;
-      this.rerenderEntireTree(this._state);
-    } else if (action.type === 'ON-CHANGE-MESSAGE'){
-      this._state.messagesPage.chengeMessage = action.mess;
-      this.rerenderEntireTree(this._state);
-      
-    } else if (action.type === 'ADD-MESSAGE') {
-      let newMessage = {
-        id: this._state.messagesPage.messagesData.length + 1,
-        message: this._state.messagesPage.chengeMessage,
-      };
-      this._state.messagesPage.messagesData.push(newMessage);
-      this.rerenderEntireTree(this._state);
-      this._state.messagesPage.chengeMessage = '';
-  
-    } */
   },
 
   subscribe(observer) {

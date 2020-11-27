@@ -1,26 +1,31 @@
 const ADD_POST = 'ADD-POST';
 const ON_CHANGE_POST = 'ON-CHANGE-POST';
 
-
-const contentPageReducer = (state, action) => {
-
-  if (action.type === ADD_POST) {
-    let newPost = {
-      id: 5,
-      message: state.chengePost,
-      likeNumb:0,
-      avaLink: 'https://i.pinimg.com/170x/a1/9b/83/a19b83023cdb650a17623bf6bf456245.jpg'
-    };
-    state.postsData.push(newPost);
-    state.chengePost = '';
-
-  } else if (action.type === ON_CHANGE_POST){
-    state.chengePost = action.mess;
-
-  }
-    return state;
+let initialState = {
+  postsData: [
+      {id: '1', message:'Hi, bro..,', likeNumb: '32', avaLink: 'https://i.pinimg.com/170x/a1/9b/83/a19b83023cdb650a17623bf6bf456245.jpg'},
+      {id: '2', message:'Hello world!', likeNumb: '20', avaLink: 'https://i.pinimg.com/170x/a1/9b/83/a19b83023cdb650a17623bf6bf456245.jpg'},],
+  chengePost: 'it-kamasutra.com',
 }
-
+const contentPageReducer = (state = initialState, action) => {
+  switch(action.type) {
+    case ADD_POST:
+      let newPost = {
+        id: 5,
+        message: state.chengePost,
+        likeNumb:0,
+        avaLink: 'https://i.pinimg.com/170x/a1/9b/83/a19b83023cdb650a17623bf6bf456245.jpg'
+  };
+        state.postsData.push(newPost);
+        state.chengePost = '';
+        return state;
+     case ON_CHANGE_POST:
+        state.chengePost = action.mess;
+        return state;
+     default:
+        return state;    
+  }
+}
 export const addPostActionCreater = () => {
   return(
     {type: ADD_POST}
