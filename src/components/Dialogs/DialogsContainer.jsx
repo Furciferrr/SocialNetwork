@@ -1,8 +1,9 @@
-import React from 'react';
+
 import Dialogs from './Dialogs'
 import {updateChengeMessage, addMessageActionCreater} from '../../redax/messagePage-reducer'
+import { connect } from 'react-redux'
  
-const DialogsContainer = (props) => {
+/* const DialogsContainer = (props) => {
   
 
 
@@ -25,6 +26,25 @@ const DialogsContainer = (props) => {
       messagesPage={messagesPage}/>
       
     )
+} */
+
+const mapStateToProps = (state) =>{
+  return{
+    messagesPage: state.messagesPage
+  }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+    updateChengeMessage: (text) => {
+      dispatch(updateChengeMessage(text))
+    },
+    addMessageAction: () => {
+      dispatch(addMessageActionCreater())
+    }
+  }
+}
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps) (Dialogs);
 
 export default DialogsContainer

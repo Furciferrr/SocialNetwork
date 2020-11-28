@@ -13,14 +13,11 @@ function App(props) {
   return (
         <div className="app-wrapper">
           <Header/>
-          <Nav state={props.store.getState()}/>
+          <Nav state={props.state}/>
           <div className='app-wrapper-content'>
-              <Route path="/profile" render={ () => <Content
-                                         state={props.store.getState()}
-                                         store={props.store}
-                                         dispatch={props.dispatch}/>}/>
+              <Route path="/profile" render={ () => <Content/>}/>
               <Route path="/dialogs" render={ () => <DialogsContainer
-                                         store={props.store}/>}/> 
+              state={props.state}/>}/> 
               <Route path="/news" render={ () => <News/>}/>
               <Route path="/music" render={ () => <Music/>}/> 
               <Route path="/settings" render={ () => <Settings/>}/> 

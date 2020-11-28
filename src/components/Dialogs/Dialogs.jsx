@@ -20,6 +20,7 @@ const Dialogs = (props) => {
 
     let addMessage = () => {
       props.addMessageAction();
+      console.log(props.messagesPage)
     }
 
     let changeText = (e) => {

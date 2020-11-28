@@ -1,9 +1,10 @@
-import React from 'react';
+
+import { connect } from 'react-redux';
 import {addPostActionCreater, updateChengePost} from '../../../redax/contentPage-reducer'
 import MyPosts from './Myposts'
 
 
-const MypostsContainer = (props) => {
+/* const MypostsContainer = (props) => {
 
 let contentPage = props.store.getState().contentPage
 
@@ -22,6 +23,30 @@ let changeText = (text) => {
       addPostAction={addPosts}
       contentPage={contentPage}/>
     )
+} */
+ 
+
+
+
+
+const mapStateToProps = (state) => {
+  return {
+    contentPage: state.contentPage
+  }
 }
+
+const mapDispatchToProps =(dispatch) => {
+  return{
+    updateNewPost: (text) => {
+      let action = updateChengePost(text);
+      dispatch(action);
+    },
+    addPostAction: () =>{
+      dispatch(addPostActionCreater())
+    }
+  }
+}
+
+const MypostsContainer = connect(mapStateToProps, mapDispatchToProps) (MyPosts);
 
 export default MypostsContainer
