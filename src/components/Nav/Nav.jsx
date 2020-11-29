@@ -20,7 +20,7 @@ const Nav = (props) => {
     
     let bestFriendElem = props.state.bestFriends.bestFriends.map((friend) => {
         return(
-            <BestFriends avaLink={friend.dialogAvaLink} name={friend.name}/>
+            <BestFriends key={friend.id} avaLink={friend.dialogAvaLink} name={friend.name}/>
         )
         
     })
@@ -40,6 +40,9 @@ const Nav = (props) => {
         </div>
         <div className={classes.item}>
             <NavLink to='settings' activeClassName={classes.activeLink}>Settings</NavLink>
+        </div>
+        <div className={classes.item}>
+            <NavLink to='users' activeClassName={classes.activeLink}>Find Friends</NavLink>
         </div>
         <div className={classes.friends}>
             <h1>Friends</h1>

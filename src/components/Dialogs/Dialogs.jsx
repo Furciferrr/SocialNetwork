@@ -8,7 +8,7 @@ const Dialogs = (props) => {
 
     let dialogsElements = props.messagesPage.dialogData.map((element) => {
       return(
-        <DialogItem name={element.name} id={element.id} dialogAvaLink={element.dialogAvaLink}/>
+        <DialogItem name={element.name} key={element.id} id={element.id} dialogAvaLink={element.dialogAvaLink}/>
       );
     });
 
@@ -20,7 +20,6 @@ const Dialogs = (props) => {
 
     let addMessage = () => {
       props.addMessageAction();
-      console.log(props.messagesPage)
     }
 
     let changeText = (e) => {

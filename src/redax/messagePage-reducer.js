@@ -19,22 +19,20 @@ let initialState = {
 
 const messagePageReducer = (state = initialState, action) => {
   switch(action.type) {
-    case ON_CHANGE_MESSAGE: {
-      let stateCopy = {...state};
-      stateCopy.chengeMessage = action.mess;
-      return stateCopy;
-    }
-    case ADD_MESSAGE: 
-      let stateCopy = {...state};
-      stateCopy.messagesData = [...state.messagesData];
-      stateCopy.dialogData = [...state.dialogData];
-      let newMessage = {
-        id: stateCopy.messagesData.length + 1,
-        message: stateCopy.chengeMessage,
+    case ON_CHANGE_MESSAGE: 
+      return {
+        ...state,
+        chengeMessage: action.mess
       };
-      stateCopy.messagesData.push(newMessage);
-      stateCopy.chengeMessage = '';
-      return stateCopy;
+    case ADD_MESSAGE: 
+      return {
+        ...state,
+        chengeMessage: '',
+        messagesData: [...state.messagesData, 
+          {id: state.messagesData.length + 1,
+          message: state.chengeMessage} ]
+      };
+      
     default:
       return state; 
   }

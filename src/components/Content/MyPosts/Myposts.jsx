@@ -7,7 +7,7 @@ const MyPosts = (props) => {
 
 let postsElem = props.contentPage.postsData.map((post) => {
   return (
-    <Post message={post.message} likenumb={post.likeNumb} avalink={post.avaLink}/>
+    <Post message={post.message} key={post.id} likenumb={post.likeNumb} avalink={post.avaLink}/>
   );
 });
 
