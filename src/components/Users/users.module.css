@@ -1,3 +1,21 @@
 .wrapUsers img {
     width: 100px;
 }
+
+.activePage {
+    font-weight: bold;
+    
+}
+
+
+.usersPageWrap span {
+    cursor: pointer;
+    margin: 5px;
+
+}
+
+.pageNumber {
+    max-width: 960px;
+    overflow: hidden;
+}
+
