@@ -1,15 +1,10 @@
-"use strict"
-
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
 let initialState = {
   users: []
-  
 }
-
-
 
 const userPageReducer = (state = initialState, action) => {
   switch(action.type) {

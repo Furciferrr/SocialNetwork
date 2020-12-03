@@ -4,19 +4,19 @@ import userPhotoDefault from './../../assets/images/users.png'
 import classes from './users.module.css'
 
 
-class Users extends React.Component {
-        componentDidMount() {
+const Users = (props) => {
+
+    let getUsers = () => {
+        if (props.users.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => { 
-                this.props.setUsers(response.data.items)
-                });
-        }
-            
- 
-    render() {
+            props.setUsers(response.data.items)
+            }) 
+        } 
+    }
+
+
+    let usersElem = props.users.map( u => {
         return (
-        <div>
-            {
-            this.props.users.map( u => 
             <div className={classes.wrapUsers}>
                 <div><img src={u.photos.small != null ? u.photos.small : userPhotoDefault} alt="ava"/></div>
                 <div>{u.name}</div>
@@ -26,15 +26,22 @@ class Users extends React.Component {
                 <div>
                 {u.followed 
                 ? <button onClick={ () => {
-                    this.props.unfollow(u.id)}}>Unfollow</button>
+                    props.unfollow(u.id)}}>Unfollow</button>
                     : <button onClick={() =>{
-                    this.props.follow(u.id)}}>Follow</button>}
+                    props.follow(u.id)}}>Follow</button>}
                 </div>
             </div>
-            )}
-       </div>
         )
-    }
+    })
+
+
+    return (
+        <div>
+             <button onClick={getUsers}>Get Users</button>
+            {usersElem}
+        </div>
+    )
 }
+
 
 export default Users

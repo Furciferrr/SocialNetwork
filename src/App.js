@@ -4,7 +4,7 @@ import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 import Content from './components/Content/Content';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import News from './components/News/News';
+import ContainerNews from './components/News/conteinerNews';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer';
@@ -19,7 +19,7 @@ function App(props) {
               <Route path="/profile" render={ () => <Content/>}/>
               <Route path="/dialogs" render={ () => <DialogsContainer
               state={props.state}/>}/> 
-              <Route path="/news" render={ () => <News/>}/>
+              <Route path="/news" render={ () => <ContainerNews/>}/>
               <Route path="/music" render={ () => <Music/>}/> 
               <Route path="/settings" render={ () => <Settings/>}/> 
               <Route path="/users" render={ () => <UsersContainer/>}/> 
