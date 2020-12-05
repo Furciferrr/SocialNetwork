@@ -33,16 +33,16 @@ const Nav = (props) => {
             <NavLink to='/dialogs' activeClassName={classes.activeLink}>Messages</NavLink>
         </div>
         <div className={classes.item}>
-            <NavLink to='news' activeClassName={classes.activeLink}>News</NavLink>
+            <NavLink to='/news' activeClassName={classes.activeLink}>News</NavLink>
         </div>
         <div className={classes.item}>
-            <NavLink to='music' activeClassName={classes.activeLink}>Music</NavLink>
+            <NavLink to='/music' activeClassName={classes.activeLink}>Music</NavLink>
         </div>
         <div className={classes.item}>
-            <NavLink to='settings' activeClassName={classes.activeLink}>Settings</NavLink>
+            <NavLink to='/settings' activeClassName={classes.activeLink}>Settings</NavLink>
         </div>
         <div className={classes.item}>
-            <NavLink to='users' activeClassName={classes.activeLink}>Find Friends</NavLink>
+            <NavLink to='/users' activeClassName={classes.activeLink}>Find Friends</NavLink>
         </div>
         <div className={classes.friends}>
             <h1>Friends</h1>

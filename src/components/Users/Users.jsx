@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import userPhotoDefault from './../../assets/images/users.png'
 import classes from './users.module.css'
 
@@ -23,7 +24,9 @@ const Users = (props) => {
             {
             props.users.map( u => 
             <div className={classes.wrapUsers}>
+                <NavLink to={'/profile/' + u.id}>
                 <div><img src={u.photos.small != null ? u.photos.small : userPhotoDefault} alt="ava"/></div>
+                </NavLink>
                 <div>{u.name}</div>
                 <div>{u.status}</div>
                 <div>{'u.location.city'}</div>
