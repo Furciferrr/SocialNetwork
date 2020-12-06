@@ -2,6 +2,7 @@ const ADD_POST = 'ADD-POST';
 const ON_CHANGE_POST = 'ON-CHANGE-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
+
 let initialState = {
   postsData: [
       {id: 1, message:'Hi, bro..,', likeNumb: '32', avaLink: 'https://i.pinimg.com/170x/a1/9b/83/a19b83023cdb650a17623bf6bf456245.jpg'},
@@ -39,7 +40,8 @@ const contentPageReducer = (state = initialState, action) => {
        return {
          ...state,
          userProfile: action.userProfile 
-       }   
+       }
+    
      default:
         return state;    
   }
@@ -61,5 +63,7 @@ export const setUserProfile = (userProfile) =>{
     {type: SET_USER_PROFILE,  userProfile}
   )
 }
+
+
 
 export default contentPageReducer
