@@ -6,3 +6,14 @@
   .header img {
     max-width: 80px;
   }
+
+  .login {
+    float: right;
+    margin: 15px;
+    cursor: pointer;
+  }
+
+  .login a {
+    color: white;
+    
+  }

@@ -4,13 +4,15 @@ import messagePageReducer from './messagePage-reducer'
 import bestFriendsReducer from './bestFriends-reducer'
 import userPageReducer from './users-reducer'
 import newsPageReducer from './news-reducer'
+import authReducer from './auth-reducer'
 
 let reducers = combineReducers({
     contentPage:contentPageReducer,
     messagesPage:messagePageReducer,
     bestFriends:bestFriendsReducer,
     usersPage:userPageReducer,
-    newsPage:newsPageReducer
+    newsPage:newsPageReducer,
+    auth:authReducer
 });
 
 let store = createStore(reducers);

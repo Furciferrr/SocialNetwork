@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Nav from './components/Nav/Nav';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import ContainerNews from './components/News/conteinerNews';
@@ -13,7 +13,7 @@ import ProfileContainerConnect from './components/Content/ProfileContainer'
 function App(props) {
   return (
         <div className="app-wrapper">
-          <Header/>
+          <HeaderContainer/>
           <Nav state={props.state}/>
           <div className='app-wrapper-content'>
               <Route path="/profile/:userId?" render={ () => <ProfileContainerConnect/>}/>
