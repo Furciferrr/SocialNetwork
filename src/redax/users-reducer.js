@@ -1,16 +1,26 @@
+import usersAPI from './../api/api';
+
+
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_USER_TOTAL_COUNT = 'SET_USER_TOTAL_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
+
+
+
+
 
 let initialState = {
   users: [],
   currentPage: 1,
   pageSize: 4,
   usersTotalCount: 0,
-  isFetching: false
+  isFetching: false,
+  followingProgress: false
   
   
 }
@@ -52,7 +62,11 @@ const userPageReducer = (state = initialState, action) => {
       case TOGGLE_IS_FETCHING:{
         return {
             ...state, isFetching: action.isFetching} 
-            }   
+            } 
+      case TOGGLE_IS_FOLLOWING_PROGRESS:{
+        return {
+            ...state, followingProgress: action.followingProgress} 
+            }         
                
       default:
         return state;    
@@ -92,6 +106,38 @@ export const SetIsFetching = (isFetching) =>{
     {type: TOGGLE_IS_FETCHING, isFetching}
   ) 
 }
+
+export const setFollowingProgress = (followingProgress) => {
+  return (
+    {type: TOGGLE_IS_FOLLOWING_PROGRESS, followingProgress}
+  )
+}
+
+export const getUsersThunk = (currentPage, pageSize) => {
+  return (dispatch) => {
+      dispatch(SetIsFetching(true))
+      usersAPI.getUsers(currentPage, pageSize).then(response => {
+          dispatch(SetIsFetching(false))
+          dispatch(setUsers(response.items))
+          dispatch(userTotalCount(response.totalCount))
+          });
+    }
+}
+
+export const onPageChengeThunk = (pageNumber, pageSize) => {
+  return (dispatch) => {
+    dispatch(setCurrentPage(pageNumber));
+    dispatch(SetIsFetching(true))
+    usersAPI.getUsers(pageNumber, pageSize)
+    .then(response => { 
+        dispatch(SetIsFetching(false))
+        dispatch(setUsers(response.items))
+        });
+  }
+}
+
+
+
 
 
 export default userPageReducer

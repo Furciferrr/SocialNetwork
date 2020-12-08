@@ -23,7 +23,18 @@ const usersAPI = {
 
     followUser (id) {
         return instance.post(`follow/${id}`, {})
+    },
+
+    getUserProfile (UserId) {
+        return instance.get(`profile/${UserId}`)
+    },
+
+    authUserData () {
+        return instance.get(`auth/me`)
+              
     }
+
+    
 
 }
 

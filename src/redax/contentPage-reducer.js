@@ -1,3 +1,5 @@
+import usersAPI from './../api/api';
+
 const ADD_POST = 'ADD-POST';
 const ON_CHANGE_POST = 'ON-CHANGE-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -64,6 +66,12 @@ export const setUserProfile = (userProfile) =>{
   )
 }
 
-
+export const getUserProfile = (userId) => {
+  return (dispatch) => {
+    usersAPI.getUserProfile(userId).then(response => {
+      dispatch(setUserProfile(response.data))
+      });
+  }
+}
 
 export default contentPageReducer

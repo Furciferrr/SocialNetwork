@@ -33,21 +33,25 @@ const Users = (props) => {
                 <div>'{'u.location.country'}'</div>
                 <div>
                 {u.followed 
-                    ? <button onClick={ () => {
+                    ? <button disabled={props.followingProgress} onClick={ () => {
+                            props.setFollowingProgress(true)
                             usersAPI.unfollowUser(u.id)
                             .then(response => { 
                         if (response.data.resultCode === 0) {
                             props.unfollow(u.id)
                         }
+                        props.setFollowingProgress(false)
                         });
                         }}>Unfollow</button>
 
-                    : <button onClick={() =>{
+                    : <button disabled={props.followingProgress} onClick={() =>{
+                            props.setFollowingProgress(true)
                             usersAPI.followUser(u.id)
                             .then(response => { 
                         if (response.data.resultCode === 0) {
                             props.follow(u.id)
                         }
+                        props.setFollowingProgress(false)
                         });
                         }}>Follow</button>}
                 </div>

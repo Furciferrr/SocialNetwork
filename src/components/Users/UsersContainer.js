@@ -1,38 +1,26 @@
 import React from 'react'
 import Users from './Users'
 import { connect } from 'react-redux'
-import {follow, unfollow, setUsers, setCurrentPage, userTotalCount, SetIsFetching} from './../../redax/users-reducer'
+import {follow, unfollow, setCurrentPage, setFollowingProgress} from './../../redax/users-reducer'
 import Preloader from './../common/preloader/preloader'
-import usersAPI from './../../api/api'
+import {getUsersThunk, onPageChengeThunk} from './../../redax/users-reducer'
 
 class UsersContainerApp extends React.Component {
     componentDidMount() {
-        this.props.SetIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-        .then(response => {
-            this.props.SetIsFetching(false)
-            this.props.setUsers(response.items)
-            this.props.userTotalCount(response.totalCount)
-            });
+        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize) 
     }
 
     onPageChenge = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.SetIsFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-        .then(response => { 
-            this.props.SetIsFetching(false)
-            this.props.setUsers(response.items)
-            });
-    }
-        
+        this.props.onPageChengeThunk(pageNumber, this.props.pageSize)
+    } 
+    
 render() {
     return (
         <>
        {this.props.isFetching ? <Preloader/> : null}
         
             <Users 
-            
+                {...this.props}
                 usersTotalCount={this.props.usersTotalCount}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
@@ -40,6 +28,7 @@ render() {
                 users={this.props.users}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
+                
             
             />
         </>
@@ -53,13 +42,13 @@ const mapStateToProps = (state) => {
        currentPage: state.usersPage.currentPage,
        pageSize: state.usersPage.pageSize,
        usersTotalCount: state.usersPage.usersTotalCount,
-       isFetching: state.usersPage.isFetching
+       isFetching: state.usersPage.isFetching,
+       followingProgress: state.usersPage.followingProgress
 
     }
 }
 
 
-const UsersContainer = connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage,
-     userTotalCount, SetIsFetching})(UsersContainerApp);
+const UsersContainer = connect(mapStateToProps, {follow, unfollow, setCurrentPage, setFollowingProgress, getUsersThunk, onPageChengeThunk})(UsersContainerApp);
 
 export default UsersContainer
