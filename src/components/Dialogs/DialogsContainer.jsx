@@ -2,35 +2,13 @@
 import Dialogs from './Dialogs'
 import {updateChengeMessage, addMessageActionCreater} from '../../redax/messagePage-reducer'
 import { connect } from 'react-redux'
+import { withAuthRedirect } from '../hoc/withAuthRedirect'
+import { compose } from 'redux'
  
-/* const DialogsContainer = (props) => {
-  
-
-
-    let messagesPage = props.store.getState().messagesPage
-   
-
-
-    let addMessage = () => {
-      props.store.dispatch(addMessageActionCreater());
-    }
-
-    let changeText = (text) => {
-      props.store.dispatch(updateChengeMessage(text))
-    }
-
-    return (
-      <Dialogs
-      updateChengeMessage={changeText}
-      addMessageAction={addMessage}
-      messagesPage={messagesPage}/>
-      
-    )
-} */
 
 const mapStateToProps = (state) =>{
   return{
-    messagesPage: state.messagesPage
+    messagesPage: state.messagesPage,
   }
 }
 
@@ -45,6 +23,10 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps) (Dialogs);
+const DialogsContainer = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Dialogs)
+
 
 export default DialogsContainer

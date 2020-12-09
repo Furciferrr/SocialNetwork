@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Content from './Content';
-import { getUserProfile } from './../../redax/contentPage-reducer'
+import { getUserProfileThunk } from './../../redax/contentPage-reducer'
 import { withRouter } from 'react-router-dom';
+import { withAuthRedirect } from '../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
    componentDidMount () {
@@ -11,7 +13,7 @@ class ProfileContainer extends React.Component {
         userId = 13120
     }  
 
-    this.props.getUserProfile(userId)
+    this.props.getUserProfileThunk(userId)
 
    }
  
@@ -25,14 +27,16 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) =>{
     return {
-        profile: state.contentPage.userProfile
+        profile: state.contentPage.userProfile,
     }
 }
 
-const withUrlDataContainerComponent = withRouter(ProfileContainer)
+const ProfileContainerConnect = compose(
+    connect(mapStateToProps, {getUserProfileThunk}),
+    withRouter,
+    withAuthRedirect
+) (ProfileContainer)
 
-const ProfileContainerConnect = connect(mapStateToProps, {getUserProfile})
-(withUrlDataContainerComponent)
 
 export default ProfileContainerConnect
 

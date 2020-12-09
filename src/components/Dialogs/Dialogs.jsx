@@ -15,8 +15,6 @@ const Dialogs = (props) => {
 
     let messagesElements = props.messagesPage.messagesData.map(message => <Message message={message.message}/>);
 
-   
-
 
     let addMessage = () => {
       props.addMessageAction();
@@ -27,6 +25,7 @@ const Dialogs = (props) => {
       props.updateChengeMessage(text)
     }
 
+    
     return (
       <div className={classes.dialogs}>
         <div className={classes.dialogItems}>

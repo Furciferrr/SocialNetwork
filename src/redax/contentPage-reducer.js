@@ -66,7 +66,7 @@ export const setUserProfile = (userProfile) =>{
   )
 }
 
-export const getUserProfile = (userId) => {
+export const getUserProfileThunk = (userId) => {
   return (dispatch) => {
     usersAPI.getUserProfile(userId).then(response => {
       dispatch(setUserProfile(response.data))
