@@ -2,12 +2,12 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import userPhotoDefault from './../../assets/images/users.png'
 import classes from './users.module.css'
-import usersAPI from './../../api/api'
+import {usersAPI} from './../../api/api'
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.usersTotalCount / props.pageSize);
     let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
+    for (let i = 450; i <= pagesCount; i++) {
         pages.push(i);
     }
     return (

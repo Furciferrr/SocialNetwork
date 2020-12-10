@@ -2,7 +2,7 @@ import React from 'react';
 import Preloader from '../../common/preloader/preloader';
 import classes from './ProfileInfo.module.css';
 import userPhotoDefault from './../../../assets/images/users.png'
-
+import ProfileStatus from './ProfileStatus'
 
 
 
@@ -16,7 +16,7 @@ const ProfileInfo = (props) => {
           <div>
               <img className={classes.avatar} alt='ava' src={props.profile.photos.large != null ? props.profile.photos.large : userPhotoDefault}/>
               <h3>{props.profile.fullName}</h3>
-              <div> Статус: {props.profile.aboutMe}</div>
+              <ProfileStatus status={props.status} updateStatusThunk={props.updateStatusThunk}/>
               <div>Поиск работы: {props.profile.lookingForAJobDescription} </div>
               <div>нужна работа: {props.profile.lookingForAJob} </div>
           </div>
