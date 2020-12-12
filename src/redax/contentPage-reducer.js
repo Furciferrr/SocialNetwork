@@ -23,7 +23,7 @@ let initialState = {
   ],
   chengePost: 'it-kamasutra.com',
   userProfile: null,
-  status: ''
+  status:''
 
 }
 
@@ -101,7 +101,7 @@ export const getUserProfileThunk = (userId) => {
   }
 }
 
-export const setStatusThunk = (userId) => {
+export const getStatusThunk = (userId) => {
   return (dispatch) => {
     profileAPI.getStatus(userId).then(response => {
       dispatch(setUserStatus(response.data))
@@ -113,7 +113,7 @@ export const updateStatusThunk = (status) => {
   return (dispatch) => {
     profileAPI.updateStatus(status).then(response => {
       if (response.data.resultCode === 0) {
-        dispatch(setUserStatus(response.data))
+        dispatch(setUserStatus(status))
       }
     });
   }
