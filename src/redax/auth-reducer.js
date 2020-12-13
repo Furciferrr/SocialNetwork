@@ -19,8 +19,7 @@ const authReducer = (state = initialState, action) => {
     case SET_USER_DATA: 
         return {
           ...state,
-          ...action.data,
-          isAuth: true
+          ...action.payload
         } 
     case SET_LOGIN_USER_ID: 
         return {
@@ -31,9 +30,9 @@ const authReducer = (state = initialState, action) => {
         return state;    
   }
 }
-export const setAuthUserData = (userId, email, login) => {
+export const setAuthUserData = (userId, email, login, isAuth) => {
   return(
-    {type: SET_USER_DATA, data: {userId, email, login}}
+    {type: SET_USER_DATA, payload: {userId, email, login, isAuth}}
   )
 } 
 
@@ -48,7 +47,7 @@ return (dispatch) => {
   usersAPI.authUserData().then(response => {
     if (response.data.resultCode === 0) {
       let { id, email, login } = response.data.data
-      dispatch(setAuthUserData(id, email, login))
+      dispatch(setAuthUserData(id, email, login, true))
     }
   });
 }
@@ -58,11 +57,21 @@ export const loginUserThunk = (formData) =>{
   return (dispatch) => {
     authAPI.loginUser(formData).then(response => {
       if (response.data.resultCode === 0) {
-        dispatch(setLoginUserId(response.data.data.userId))
+        dispatch(authUserDataThunk())
       }
     });
    }
   }
+
+  export const logoutUserThunk = () =>{ 
+    return (dispatch) => {
+      authAPI.logoutUser().then(response => {
+        if (response.data.resultCode === 0) {
+          dispatch(setAuthUserData(null, null, null, false))
+        }
+      });
+     }
+    }  
 
 
 export default authReducer

@@ -68,10 +68,14 @@ export const authAPI = {
 
     loginUser(formData) {
         return instance.post('/auth/login', {
-            email: formData.login,
+            email: formData.email,
             password: formData.password,
             rememberMe: formData.remembeMe
         })
+    },
+
+    logoutUser () {
+        return instance.delete(`auth/login`)
     }
  
 }
