@@ -1,6 +1,6 @@
 
 import { connect } from 'react-redux';
-import {addPostActionCreater, updateChengePost} from '../../../redax/contentPage-reducer'
+import {addPostActionCreater} from '../../../redax/contentPage-reducer'
 import MyPosts from './Myposts'
 
 
@@ -13,12 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps =(dispatch) => {
   return{
-    updateNewPost: (text) => {
-      let action = updateChengePost(text);
-      dispatch(action);
-    },
-    addPostAction: () =>{
-      dispatch(addPostActionCreater())
+    addPostAction: (postMessage) =>{
+      dispatch(addPostActionCreater(postMessage))
     }
   }
 }

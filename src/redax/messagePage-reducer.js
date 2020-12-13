@@ -1,4 +1,3 @@
-const ON_CHANGE_MESSAGE = 'ON-CHANGE-MESSAGE';
 const ADD_MESSAGE = 'ADD-MESSAGE';
 
 let initialState = {
@@ -14,23 +13,18 @@ let initialState = {
     {id: 2, message: 'How are you?'},
     {id: 3, message: 'What the fuck?'}],
 
-  chengeMessage: 'it-kamasutra.com'
+ 
 }
 
 const messagePageReducer = (state = initialState, action) => {
   switch(action.type) {
-    case ON_CHANGE_MESSAGE: 
-      return {
-        ...state,
-        chengeMessage: action.mess
-      };
     case ADD_MESSAGE: 
       return {
         ...state,
         chengeMessage: '',
         messagesData: [...state.messagesData, 
           {id: state.messagesData.length + 1,
-          message: state.chengeMessage} ]
+          message: action.message} ]
       };
       
     default:
@@ -38,16 +32,12 @@ const messagePageReducer = (state = initialState, action) => {
   }
 }
 
-export const addMessageActionCreater = () => {
+export const addMessageActionCreater = (messageValue) => {
     return(
-      {type: ADD_MESSAGE}
+      {type: ADD_MESSAGE, message: messageValue}
     )
    }
   
-  export const updateChengeMessage = (text) =>{
-    return(
-      {type:ON_CHANGE_MESSAGE, mess: text}
-    )
-  }
+
 
 export default messagePageReducer

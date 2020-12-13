@@ -1,7 +1,6 @@
 import {profileAPI, usersAPI} from './../api/api';
 
 const ADD_POST = 'ADD-POST';
-const ON_CHANGE_POST = 'ON-CHANGE-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
@@ -21,20 +20,17 @@ let initialState = {
       avaLink: 'https://i.pinimg.com/170x/a1/9b/83/a19b83023cdb650a17623bf6bf456245.jpg'
     },
   ],
-  chengePost: 'it-kamasutra.com',
   userProfile: null,
   status:''
 
 }
-
-
 
 const contentPageReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST: {
       let newPost = {
         id: 5,
-        message: state.chengePost,
+        message: action.postMessage,
         likeNumb: 0,
         avaLink: 'https://i.pinimg.com/170x/a1/9b/83/a19b83023cdb650a17623bf6bf456245.jpg'
       };
@@ -43,14 +39,8 @@ const contentPageReducer = (state = initialState, action) => {
         postsdata: [...state.postsData],
       };
       stateCopy.postsData.push(newPost)
-      stateCopy.chengePost = ''
       return stateCopy
     }
-    case ON_CHANGE_POST:
-      return {
-        ...state,
-        chengePost: action.mess
-      }
       case SET_USER_PROFILE:
         return {
           ...state,
@@ -68,15 +58,9 @@ const contentPageReducer = (state = initialState, action) => {
 }
 
 
-export const addPostActionCreater = () => {
+export const addPostActionCreater = (postMessage) => {
   return ({
-    type: ADD_POST
-  })
-}
-export const updateChengePost = (text) => {
-  return ({
-    type: ON_CHANGE_POST,
-    mess: text
+    type: ADD_POST, postMessage
   })
 }
 export const setUserProfile = (userProfile) => {

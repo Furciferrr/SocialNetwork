@@ -5,7 +5,7 @@ import Nav from './components/Nav/Nav';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import ContainerNews from './components/News/conteinerNews';
 import Music from './components/Music/Music';
-import LoginPage from './components/Login/Login';
+import LoginContainer from './components/Login/Login';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer';
 import { Route } from 'react-router-dom';
@@ -24,7 +24,7 @@ function App(props) {
               <Route path="/music" render={ () => <Music/>}/> 
               <Route path="/settings" render={ () => <Settings/>}/> 
               <Route path="/users" render={ () => <UsersContainer/>}/> 
-              <Route path="/login" render={ () => <LoginPage/>}/>
+              <Route path="/login" render={ () => <LoginContainer/>}/>
           </div>
         </div>
   );
