@@ -8,11 +8,6 @@ import { authUserDataThunk, logoutUserThunk } from './../../redax/auth-reducer'
 
 class HeaderContainer extends React.Component {
 
-  componentDidMount() {
-    this.props.authUserDataThunk()
-  }
-
-
   render() {
     return <Header {...this.props} />
   }

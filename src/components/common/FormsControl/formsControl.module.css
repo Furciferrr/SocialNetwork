@@ -7,3 +7,10 @@
 .formControl.error span {
   color: red;
 }
+
+
+
+.errorLogin {
+  border: solid red 2px;
+  color: red;
+}
