@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import {follow, unfollow, setCurrentPage, setFollowingProgress} from './../../redax/users-reducer'
 import Preloader from './../common/preloader/preloader'
 import {getUsersThunk, onPageChengeThunk} from './../../redax/users-reducer'
+import { getUsers, getCurrentPage, getPageSize, getTotalUser, getIsFetching, getfollowingProgress} from '../../redax/selectors'
 
 class UsersContainerApp extends React.Component {
     componentDidMount() {
@@ -14,7 +15,7 @@ class UsersContainerApp extends React.Component {
         this.props.onPageChengeThunk(pageNumber, this.props.pageSize)
     } 
     
-render() {
+  render() {
     return (
         <>
        {this.props.isFetching ? <Preloader/> : null}
@@ -38,12 +39,12 @@ render() {
 
 const mapStateToProps = (state) => {
     return {
-       users: state.usersPage.users,
-       currentPage: state.usersPage.currentPage,
-       pageSize: state.usersPage.pageSize,
-       usersTotalCount: state.usersPage.usersTotalCount,
-       isFetching: state.usersPage.isFetching,
-       followingProgress: state.usersPage.followingProgress
+       users: getUsers(state),
+       currentPage: getCurrentPage(state),
+       pageSize: getPageSize(state),
+       usersTotalCount: getTotalUser(state),
+       isFetching: getIsFetching(state),
+       followingProgress: getfollowingProgress(state)
 
     }
 }
