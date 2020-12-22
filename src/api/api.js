@@ -9,6 +9,20 @@ const instance = axios.create({
     }
 })
 
+const instatnseTest = axios.create({
+    withCredentials: true,
+    baseURL: 'https://jsonplaceholder.typicode.com/todos/1'
+})
+
+
+export const testAPI = {
+    getInfo () {
+        return instatnseTest.get().then(response => {
+            return response.data
+        })
+    }
+} 
+
 
 export const usersAPI = {
     

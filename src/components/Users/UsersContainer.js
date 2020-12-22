@@ -3,7 +3,7 @@ import Users from './Users'
 import { connect } from 'react-redux'
 import {follow, unfollow, setCurrentPage, setFollowingProgress} from './../../redax/users-reducer'
 import Preloader from './../common/preloader/preloader'
-import {getUsersThunk, onPageChengeThunk} from './../../redax/users-reducer'
+import {getUsersThunk, onPageChengeThunk, followThunk, unfollowThunk} from './../../redax/users-reducer'
 import { getUsers, getCurrentPage, getPageSize, getTotalUser, getIsFetching, getfollowingProgress} from '../../redax/selectors'
 
 class UsersContainerApp extends React.Component {
@@ -29,8 +29,6 @@ class UsersContainerApp extends React.Component {
                 users={this.props.users}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
-                
-            
             />
         </>
     )
@@ -50,6 +48,6 @@ const mapStateToProps = (state) => {
 }
 
 
-const UsersContainer = connect(mapStateToProps, {follow, unfollow, setCurrentPage, setFollowingProgress, getUsersThunk, onPageChengeThunk})(UsersContainerApp);
+const UsersContainer = connect(mapStateToProps, {follow, unfollow, setCurrentPage, setFollowingProgress, getUsersThunk, onPageChengeThunk, followThunk, unfollowThunk})(UsersContainerApp);
 
 export default UsersContainer

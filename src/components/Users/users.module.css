@@ -2,21 +2,5 @@
     width: 100px;
 }
 
-.activePage {
-    font-weight: bold;
-    
-}
-
-
-.pageNumber {
-    max-width: 960px;
-    overflow: hidden;
-}
-
-.pageNumber span {
-    cursor: pointer;
-    margin: 5px;
-    
-}
 
 

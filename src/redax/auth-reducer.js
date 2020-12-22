@@ -2,8 +2,8 @@ import { stopSubmit } from 'redux-form';
 import {usersAPI, authAPI} from './../api/api';
 
 
-const SET_USER_DATA = 'SET_USER_DATA';
-const SET_LOGIN_USER_ID = 'SET_LOGIN_USER_ID'
+const SET_USER_DATA = 'auth/SET_USER_DATA';
+const SET_LOGIN_USER_ID = 'autn/SET_LOGIN_USER_ID'
 
 
 
@@ -44,19 +44,18 @@ export const setLoginUserId = (userId) => {
 }
 
 export const authUserDataThunk = () =>{ 
-return (dispatch) => {
-return usersAPI.authUserData().then(response => {
+return async (dispatch) => {
+   let response = await usersAPI.authUserData()
     if (response.data.resultCode === 0) {
       let { id, email, login } = response.data.data
       dispatch(setAuthUserData(id, email, login, true))
     }
-  });
 }
 }
 
 export const loginUserThunk = (formData) =>{ 
-  return (dispatch) => {
-    authAPI.loginUser(formData).then(response => {
+  return async (dispatch) => {
+    let response = await authAPI.loginUser(formData)
       if (response.data.resultCode === 0) {
         dispatch(authUserDataThunk())
       } else {
@@ -64,17 +63,15 @@ export const loginUserThunk = (formData) =>{
         const action = stopSubmit('login', {_error:message})
         dispatch(action)
       }
-    });
    }
   }
 
   export const logoutUserThunk = () =>{ 
-    return (dispatch) => {
-      authAPI.logoutUser().then(response => {
+    return async (dispatch) => {
+    let response = await authAPI.logoutUser()
         if (response.data.resultCode === 0) {
           dispatch(setAuthUserData(null, null, null, false))
         }
-      });
      }
     }  
 
