@@ -7,13 +7,16 @@ import ContainerNews from './components/News/conteinerNews';
 import Music from './components/Music/Music';
 import LoginContainer from './components/Login/Login';
 import Settings from './components/Settings/Settings';
-import UsersContainer from './components/Users/UsersContainer';
 import { Route, withRouter } from 'react-router-dom';
 import ProfileContainerConnect from './components/Content/ProfileContainer'
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { initializeAppThunk } from './redax/app-reducer';
 import Preloader from './components/common/preloader/preloader';
+import withSuspense from './components/hoc/withSuspense';
+
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
+
 
 class App extends React.Component {
 
@@ -37,7 +40,7 @@ class App extends React.Component {
                   <Route path="/news" render={ () => <ContainerNews/>}/>
                   <Route path="/music" render={ () => <Music/>}/> 
                   <Route path="/settings" render={ () => <Settings/>}/> 
-                  <Route path="/users" render={ () => <UsersContainer/>}/> 
+                  <Route path="/users" render={ withSuspense(UsersContainer) }/> 
                   <Route path="/login" render={ () => <LoginContainer/>}/>
               </div>
             </div>
