@@ -7,7 +7,7 @@ import ContainerNews from './components/News/conteinerNews';
 import Music from './components/Music/Music';
 import LoginContainer from './components/Login/Login';
 import Settings from './components/Settings/Settings';
-import { Route, withRouter } from 'react-router-dom';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import ProfileContainerConnect from './components/Content/ProfileContainer'
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -34,6 +34,8 @@ class App extends React.Component {
               <HeaderContainer/>
               <Nav state={this.props.state}/>
               <div className='app-wrapper-content'>
+                <Switch>
+                  <Route exact path="/" render={ () => <Redirect to={'/profile'}/> }/>
                   <Route path="/profile/:userId?" render={ () => <ProfileContainerConnect/>}/>
                   <Route path="/dialogs" render={ () => <DialogsContainer
                          state={this.props.state}/>}/> 
@@ -42,6 +44,8 @@ class App extends React.Component {
                   <Route path="/settings" render={ () => <Settings/>}/> 
                   <Route path="/users" render={ withSuspense(UsersContainer) }/> 
                   <Route path="/login" render={ () => <LoginContainer/>}/>
+                  <Route path="*" render={ () => <div>404 NOT FOUND</div>}/>
+                </Switch> 
               </div>
             </div>
       );

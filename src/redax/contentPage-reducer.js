@@ -1,10 +1,11 @@
+import { stopSubmit } from 'redux-form';
 import {profileAPI, usersAPI} from './../api/api';
 
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE'
 const SET_STATUS = 'profile/SET_STATUS'
-
-
+const SAVE_PHOTO_SUCCES = 'SAVE_PHOTO_SUCCES'
+const SAVE_PROFILE = 'SAVE_PROFILE'
 
 let initialState = {
   postsData: [{
@@ -51,7 +52,16 @@ const contentPageReducer = (state = initialState, action) => {
             ...state,
             status: action.status
           }
-
+          case SAVE_PHOTO_SUCCES:
+            return {
+              ...state,
+              userProfile: {...state.userProfile, photos: action.photos}
+            } 
+            case SAVE_PROFILE:
+              return {
+                ...state,
+                userProfile: {...state.userProfile, photos: action.photos}
+              }  
           default:
             return state;
   }
@@ -74,6 +84,20 @@ export const setUserStatus = (status) => {
   return ({
     type: SET_STATUS,
     status
+  })
+}
+
+
+export const savePhotoSucces = (photos) => {
+  return ({
+    type: SAVE_PHOTO_SUCCES,
+    photos
+  })
+}
+
+export const saveProfile = (formData) => {
+  return ({
+    type: SAVE_PROFILE, formData
   })
 }
 
@@ -102,5 +126,30 @@ export const updateStatusThunk = (status) => {
     });
   }
 }
+
+export const savePhotoThunk = (photo) => {
+  return (dispatch) => {
+    profileAPI.savePhoto(photo).then(response => {
+      if (response.data.resultCode === 0) {
+        dispatch(savePhotoSucces(response.data.data.photos))
+      }
+    });
+  }
+}
+
+
+export const setFormDataThunk = (formData) => async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+    const response = await profileAPI.saveProfile(formData)
+      if (response.data.resultCode === 0) {
+        dispatch(getUserProfileThunk(userId))
+      } else {
+        dispatch(stopSubmit('ProfileData', {_error: response.data.messages[0]}))
+        return Promise.reject(response.data.messages[0]);
+      }
+  }
+
+
+
 
 export default contentPageReducer

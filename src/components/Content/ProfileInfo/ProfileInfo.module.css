@@ -13,3 +13,11 @@
     h3 {
       margin-top: 2px;
     }
+
+    .clear {
+      clear:both;
+    }
+
+    .contacts {
+      padding-left: 10px;
+    }

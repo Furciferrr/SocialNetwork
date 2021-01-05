@@ -1,22 +1,37 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 import classes from './Music.module.css';
-import {testAPI} from './../../api/api'
 
 
 const Music = (props) => {
-const getInfoFunc = () => {
- let answer = testAPI.getInfo()
- console.log(answer)
-
-}
+  const onSubmit = (formData) => {
+    console.log(formData)
+  }
     return (
       <div className={classes.music}>
-        <button onClick={() => {
-          getInfoFunc()
-        } }>Push me</button>
-        Music 
+         <MusicReduxForm onSubmit={onSubmit} />
       </div>
     )
 }
+
+
+const MusicForm = (props) => {
+  return <form onSubmit={props.handleSubmit} >
+    <div>
+       <Field name="lastName" component="input" type="text"/>
+    </div>
+    <div>
+        <Field name="firstName" component="input" type="text"/>
+    </div>
+    <div>
+        <Field name="email" component="input" type="email" />
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+}
+
+const MusicReduxForm = reduxForm({
+  form: 'musicForm'
+})(MusicForm)
 
 export default Music

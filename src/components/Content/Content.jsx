@@ -7,14 +7,14 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 
 const Content = (props) => {
-   
     return (
       <div className={classes.content}>
           <div>
               <img alt='decorate' src='https://apod.nasa.gov/apod/image/2008/PerseidBridge_Zhang_4032.jpg'/>
           </div>
          <ProfileInfo profile={props.profile} status={props.status} 
-         updateStatusThunk={props.updateStatusThunk}/>
+         updateStatusThunk={props.updateStatusThunk} isOwner={props.isOwner} savePhotoThunk={props.savePhotoThunk}
+         setFormDataThunk={props.setFormDataThunk}/>
          <MypostsContainer
                 store={props.store}/>
       </div>

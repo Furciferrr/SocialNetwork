@@ -9,19 +9,6 @@ const instance = axios.create({
     }
 })
 
-const instatnseTest = axios.create({
-    withCredentials: true,
-    baseURL: 'https://jsonplaceholder.typicode.com/todos/1'
-})
-
-
-export const testAPI = {
-    getInfo () {
-        return instatnseTest.get().then(response => {
-            return response.data
-        })
-    }
-} 
 
 
 export const usersAPI = {
@@ -69,6 +56,22 @@ export const profileAPI = {
         return instance.put('profile/status', {
             status: status
         })
+    },
+
+    savePhoto(photoFile) {
+        const formData = new FormData();
+        formData.append('image', photoFile)
+        return instance.put('profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    },
+
+    saveProfile(formData) {
+        return instance.put('profile', 
+            formData 
+        )
     }
 
 }
@@ -84,14 +87,19 @@ export const authAPI = {
         return instance.post('/auth/login', {
             email: formData.email,
             password: formData.password,
-            rememberMe: formData.remembeMe
+            rememberMe: formData.remembeMe,
+            captcha: formData.captcha
         })
     },
 
     logoutUser () {
         return instance.delete(`auth/login`)
     }
- 
+
 }
 
-
+export const securityAPI = {
+    getCaptchaURL () {
+        return instance.get(`security/get-captcha-url`)
+    }
+}
