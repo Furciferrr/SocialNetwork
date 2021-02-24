@@ -1,46 +1,63 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import classes from './users.module.css'
 import Paginator from '../Paginator/Paginator';
 import User from './User';
-import { userType } from '../../Types/types';
 import UsersSearchForm from './UsersSearchForm';
-import { FilterType } from '../../redax/users-reducer';
+import { FilterType, followThunk, getUsersThunk, onPageChengeThunk, unfollowThunk } from '../../redax/users-reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentPage, getfollowingProgress, getPageSize, getTotalUser, getUsers, getUsersFilter } from '../../redax/selectors';
 
-type Props = {
-    usersTotalCount: number
-    pageSize: number
-    currentPage: number
-    onPageChenge: (p: number) => void
-    users: Array<userType>
-    followingProgress: Array<number>
-    followThunk: (userId: number) => void
-    unfollowThunk: (userId: number) => void
-    onFilterChanged: (filter: FilterType) => void
-}
+type Props = {}
 
-const Users: React.FC<Props> = (props) => {
+export const Users: React.FC<Props> = () => {
+    const usersTotalCount = useSelector(getTotalUser)
+    const currentPage = useSelector(getCurrentPage)
+    const pageSize = useSelector(getPageSize)
+    const filter = useSelector(getUsersFilter)
+    const users = useSelector(getUsers)
+    const followingProgress = useSelector(getfollowingProgress)
+
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(getUsersThunk(currentPage, pageSize, filter))
+    },[])
+
+    const onPageChenge = (pageNumber: number) => {
+        dispatch(onPageChengeThunk(pageNumber, pageSize, filter))
+    } 
+
+    const onFilterChanged = (filter: FilterType) => {
+        dispatch(getUsersThunk(1, pageSize, filter))
+    }
+
+    const follow = (userId: number) => {
+        dispatch(followThunk(userId))
+    }
+
+    const unfollow = (userId: number) => {
+        dispatch(unfollowThunk(userId))
+    }
+
+
     return (
         <div className={classes.usersPageWrap}>
             <div>
-                <UsersSearchForm onFilterChanged={props.onFilterChanged}/>
+                <UsersSearchForm onFilterChanged={onFilterChanged}/>
             </div>
 
-            <Paginator usersTotalCount={props.usersTotalCount}
-                pageSize={props.pageSize}
-                onPageChenge={props.onPageChenge}
-                currentPage={props.currentPage} />
+            <Paginator usersTotalCount={usersTotalCount}
+                pageSize={pageSize}
+                onPageChenge={onPageChenge}
+                currentPage={currentPage} />
             {
-                props.users.map(u =>
+                users.map(u =>
                     <User user={u}
                         key={u.id}
-                        followingProgress={props.followingProgress}
-                        followThunk={props.followThunk}
-                        unfollowThunk={props.unfollowThunk} />
+                        followingProgress={followingProgress}
+                        followThunk={follow}
+                        unfollowThunk={unfollow} />
                 )}
         </div>
     )
 }
-
-
-
-export default Users

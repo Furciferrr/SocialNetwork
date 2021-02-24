@@ -1,7 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { compose } from 'redux'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { required } from '../../utils/validators/validator'
 import { Input } from '../common/FormsControl/FormsControl'
@@ -13,8 +12,10 @@ import { AppStateType } from '../../redax/redux-store'
 type LoginFormOwnPropsType = {
     captcha: string | null
 }
+
 const LoginForm: React.FC<InjectedFormProps<LoginFormDataType, LoginFormOwnPropsType> & LoginFormOwnPropsType> = (props) => {
 
+    
     return (
         <form onSubmit={props.handleSubmit} >
             <div>
@@ -51,38 +52,28 @@ const LoginReduxForm = reduxForm<LoginFormDataType, LoginFormOwnPropsType>({
 })(LoginForm)
 
 
-const Login: React.FC <MapeStateToPropsType & MapeDispatchToPropsType> = (props) => {
+const Login: React.FC = () => {
+   
+    
+    const captchaURL = useSelector((state:AppStateType) => state.auth.captchaURL)
+    const isAuth = useSelector((state:AppStateType) => state.auth.isAuth)
+
+    const dispatch = useDispatch()
+   
+    
     const onSubmit = (formData: LoginFormDataType) => {
-        props.loginUserThunk(formData)
+        dispatch(loginUserThunk(formData))
     }
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={'/Profile'} />
     }
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit} captcha={props.captchaURL}/>
+            <LoginReduxForm onSubmit={onSubmit} captcha={captchaURL}/>
         </div>
     )
 }
 
-type MapeStateToPropsType = {
-    isAuth: boolean
-    captchaURL: string | null
-}
-
-type MapeDispatchToPropsType = {
-    loginUserThunk: (formData: LoginFormDataType) => void
-}
-
-const mapStateToProps = (state: AppStateType): MapeStateToPropsType => ({
-    isAuth: state.auth.isAuth,
-    captchaURL: state.auth.captchaURL
-})
-
-const LoginContainer = compose(
-    connect(mapStateToProps, { loginUserThunk })
-)(Login)
-
-export default LoginContainer
+export default Login
