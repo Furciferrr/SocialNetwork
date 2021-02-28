@@ -41,4 +41,10 @@ export const getUsersFilter = (state: AppStateType) => {
     return state.usersPage.filter
 }
 
-       
+export const getIsAuth = (state: AppStateType) => {
+    return state.auth.isAuth
+}  
+
+export const getLogin = (state: AppStateType) => {
+    return state.auth.login
+} 
