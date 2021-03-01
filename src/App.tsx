@@ -27,6 +27,7 @@ import {
 
 } from '@ant-design/icons';
 import { Header } from './components/Header/Header';
+import { ErrorPage } from './components/common/ErrorPages/errorPage';
 
 const {  Sider, Content } = Layout;
 
@@ -116,7 +117,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType, MyState>{
               <Route path="/users" render={() => <SuspendedDialogs />} />
               <Route path="/login" render={() => <Login />} />
               <Route path="/chat" render={() => <SuspendedChat />} />
-              <Route path="*" render={() => <div>404 NOT FOUND</div>} />
+              <Route path="*" render={() => <ErrorPage/>} />
             </Switch>
           </Content>
         </Layout>

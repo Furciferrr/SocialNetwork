@@ -37,8 +37,6 @@ const ProfileInfo: React.FC <PropsType> = (props) => {
        }
      )
   }
-  
-  
 
   return (
     <div>
