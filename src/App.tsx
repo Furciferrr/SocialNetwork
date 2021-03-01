@@ -20,6 +20,11 @@ import {
   UserOutlined,
   MessageOutlined,
   TeamOutlined,
+  SearchOutlined,
+  ToolOutlined, 
+  CaretRightOutlined,
+  GlobalOutlined
+
 } from '@ant-design/icons';
 import { Header } from './components/Header/Header';
 
@@ -73,11 +78,20 @@ class App extends React.Component<MapPropsType & DispatchPropsType, MyState>{
             <Menu.Item key="2" icon={<MessageOutlined />}>
               <NavLink to='/dialogs'>Messages</NavLink>
             </Menu.Item>
-            <Menu.Item key="3" icon={<TeamOutlined />}>
+            <Menu.Item key="3" icon={<SearchOutlined />}>
               <NavLink to='/users'>Find Friends</NavLink>
             </Menu.Item>
             <Menu.Item key="4" icon={<TeamOutlined />}>
               <Link to='/chat'>Chat</Link>
+            </Menu.Item>
+            <Menu.Item key="5" icon={<ToolOutlined />}>
+              <Link to='/settings'>Settings</Link>
+            </Menu.Item>
+            <Menu.Item key="6" icon={<CaretRightOutlined />}>
+              <Link to='/music'>Music</Link>
+            </Menu.Item>
+            <Menu.Item key="7" icon={<GlobalOutlined />}>
+              <Link to='/news'>News</Link>
             </Menu.Item>
           </Menu>
         </Sider>

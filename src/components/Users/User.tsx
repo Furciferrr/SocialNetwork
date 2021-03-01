@@ -16,7 +16,7 @@ const User: React.FC <propsType> = (props) => {
     return (
             <div className={classes.wrapUsers}>
                 <NavLink to={'/profile/' + props.user.id}>
-                <div><img src={props.user.photos.small != null ? props.user.photos.small : userPhotoDefault} alt="ava"/></div>
+                <img src={props.user.photos.small != null ? props.user.photos.small : userPhotoDefault} alt="ava"/>
                 </NavLink>
                 <div>{props.user.name}</div>
                 <div>{props.user.status || 'Not Status'}</div>
