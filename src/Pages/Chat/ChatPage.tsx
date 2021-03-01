@@ -10,6 +10,7 @@ export type ChatMessageType = {
 }
 
     const ChatPage: React.FC = () => {
+        
     return (
         <div>
             <Chat/>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './Header.module.css';
-import { Col, Row, Layout, Button } from 'antd';
+import { Col, Row, Layout, Button, Menu, Dropdown } from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   UserOutlined,
+  DownOutlined,
 } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,6 +23,7 @@ export const Header: React.FC<PropsHeaderType> = (props) => {
   const { Header } = Layout;
 
   const [collapsed, setCollapsed] = useState(true)
+
   const isAuth = useSelector(getIsAuth)
   const login = useSelector(getLogin)
 
@@ -37,6 +39,13 @@ export const Header: React.FC<PropsHeaderType> = (props) => {
     props.toggle()
   }
 
+  const menu = (
+    <Menu>
+      <Menu.Item danger>
+       <span onClick={logoutCallback}>Log Out</span>
+      </Menu.Item>
+    </Menu>)
+
   return (
     <Header className="site-layout-background" style={{ padding: 0 }}>
       <Row>
@@ -50,13 +59,14 @@ export const Header: React.FC<PropsHeaderType> = (props) => {
 
         {isAuth ?
           <>
-            <Col span={1}>
-              <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+            <Col span={8}>
+              <Dropdown overlay={menu} placement="bottomCenter">
+                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+                </a>
+              </Dropdown>
+              <span style={{ color: "white", margin: '10px' }} >{login}</span>
             </Col>
-            <Col span={7}>
-                <span style={{color: "white", margin: '10px'}} >{login}</span><Button onClick={logoutCallback}>Log Out</Button>
-            </Col>
-
           </>
           : <Col span={6}> <NavLink to='/login'>Login</NavLink> </Col>}
 

@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react';
-import Nav from './components/Nav/Nav';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import ContainerNews from './components/News/conteinerNews';
 import Music from './components/Music/Music';
@@ -43,7 +42,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType, MyState>{
 
   constructor(props: MapPropsType & DispatchPropsType) {
     super(props);
-    this.state = { collapsed: false };
+    this.state = { collapsed: document.documentElement.scrollWidth < 800 ? true : false };
 
   }
 

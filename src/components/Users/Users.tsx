@@ -49,7 +49,7 @@ export const Users: React.FC<Props> = () => {
             pathname: '/users',
             search:`?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`
         })
-    }, [filter, currentPage])
+    }, [filter, currentPage, history])
 
     const onPageChenge = (pageNumber: number) => {
         dispatch(onPageChengeThunk(pageNumber, pageSize, filter))
